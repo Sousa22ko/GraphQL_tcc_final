@@ -49,6 +49,10 @@ public class Setor extends GenericEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Setor superSetor;
 
+	public String getCodigoProprio() {
+		return codigo;
+	}
+
 	public String getCodigo() {
 		if (codigo != null && codigo.length() > 0)
 			return codigo;

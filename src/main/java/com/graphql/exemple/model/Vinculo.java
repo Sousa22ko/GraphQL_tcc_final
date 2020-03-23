@@ -48,7 +48,7 @@ public class Vinculo extends GenericEntity {
 	 * Define o tipo de vinculo que a pessoa tem com a instituição, podendo ser
 	 * estatutario, clt, bolsista, resindente, estagiario
 	 */
-	private String denominacao;
+	private String tipoVinculo;
 
 	/**
 	 * Numero da matricula da pessoa
@@ -87,12 +87,12 @@ public class Vinculo extends GenericEntity {
 	@JoinColumn(name = "id_pessoa")
 	private List<Ferias> listFerias;
 
-	public String getDenominacao() {
-		return denominacao;
+	public String getTipoVinculo() {
+		return tipoVinculo;
 	}
 
-	public void setDenominacao(String denominacao) {
-		this.denominacao = denominacao;
+	public void setTipoVinculo(String tipoVinculo) {
+		this.tipoVinculo = tipoVinculo;
 	}
 
 	public String getMatricula() {

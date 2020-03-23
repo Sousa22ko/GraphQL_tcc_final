@@ -163,4 +163,8 @@ public class Pessoa extends GenericEntity {
 	public void setListVinculo(List<Vinculo> listVinculo) {
 		this.listVinculo = listVinculo;
 	}
+	
+	public Vinculo getVinculoAtivo() {
+		return this.listVinculo.stream().filter(vinc -> {return vinc.getStatusVinculo() == true;}).findFirst().get();
+	}
 }
