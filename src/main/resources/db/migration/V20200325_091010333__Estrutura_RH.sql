@@ -4,7 +4,7 @@ create table if not exists cargo (
     data_criacao TIMESTAMP NOT NULL,
     data_modificacao TIMESTAMP,
     denominacao VARCHAR(255) NOT NULL UNIQUE
-)
+);
 
 create table if not exists pessoa (
     id_pessoa SERIAL NOT NULL PRIMARY KEY,
@@ -19,7 +19,7 @@ create table if not exists pessoa (
     cpf VARCHAR(20) NOT NULL UNIQUE,
     status_cadastro BOOLEAN NOT NULL,
     id_endereco INTEGER
-)
+);
 
 create table if not exists endereco (
     id_endereco SERIAL NOT NULL PRIMARY KEY,
@@ -35,7 +35,7 @@ create table if not exists endereco (
     numero VARCHAR(255),
     pais VARCHAR(255) NOT NULL,
     ponto_referencia VARCHAR(255)
-)
+);
 
 create table if not exists ferias (
     id_ferias SERIAL NOT NULL PRIMARY KEY,
@@ -45,7 +45,7 @@ create table if not exists ferias (
     ano_referencia VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     id_pessoa INTEGER
-)
+);
 
 create table if not exists ferias_parcela (
     id_ferias_parcela SERIAL NOT NULL PRIMARY KEY,
@@ -55,7 +55,7 @@ create table if not exists ferias_parcela (
     fim DATE NOT NULL,
     inicio DATE NOT NULL,
     id_ferias INTEGER
-)
+);
 
 create table if not exists vinculo (
     id_vinculo SERIAL NOT NULL PRIMARY KEY,
@@ -70,7 +70,7 @@ create table if not exists vinculo (
     id_pessoa INTEGER,
     id_setor INTEGER,
     status_vinculo BOOLEAN NOT NULL
-)
+);
 
 create table if not exists setor (
     id_setor SERIAL NOT NULL PRIMARY KEY,
@@ -82,4 +82,4 @@ create table if not exists setor (
     denominacao VARCHAR(75) NOT NULL,
     sigla VARCHAR(3) NOT NULL,
     tipo_setor VARCHAR(50) NOT NULL
-)
+);

@@ -41,8 +41,7 @@ import com.graphql.exemple.util.JSONProcessor;
  * @param <S> Serviço que o controller usa para armazenar os dados.
  */
 @SuppressWarnings("rawtypes")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS,
-		RequestMethod.DELETE })
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS, RequestMethod.DELETE })
 public class GenericRestController<T extends GenericEntity, S extends GenericService> {
 
 	@Autowired

@@ -1,0 +1,14 @@
+schema {
+	query: Query
+}
+
+type Query {
+	findAll: [Pessoa]
+	findById(id: Integer): Pessoa
+}
+
+type Pessoa {
+	id_pessoa: Integer
+	nome: String
+	dataNascimento: Date
+}
