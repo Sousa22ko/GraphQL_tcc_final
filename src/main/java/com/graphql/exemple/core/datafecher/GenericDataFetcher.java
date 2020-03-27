@@ -2,8 +2,8 @@ package com.graphql.exemple.core.datafecher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.graphql.exemple.model.GenericEntity;
-import com.graphql.exemple.repository.GenericRepository;
+import com.graphql.exemple.core.GenericEntity;
+import com.graphql.exemple.core.GenericRepository;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;

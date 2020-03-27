@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.graphql.exemple.core.GenericEntity;
+
 /**
  * Entidade que define o setor
  * 
@@ -17,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
-@Table(name = "Setor", schema = "rh")
+@Table(name = "Setor")
 @AttributeOverride(name = "id", column = @Column(name = "id_setor"))
 public class Setor extends GenericEntity {
 

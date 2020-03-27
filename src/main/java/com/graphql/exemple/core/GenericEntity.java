@@ -1,4 +1,4 @@
-package com.graphql.exemple.model;
+package com.graphql.exemple.core;
 
 import java.io.Serializable;
 import java.util.Date;

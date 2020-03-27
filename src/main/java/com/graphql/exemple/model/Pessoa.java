@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.graphql.exemple.core.GenericEntity;
 import com.graphql.exemple.util.CustomDateDeserializer;
 import com.graphql.exemple.util.DateFormat;
 
@@ -89,7 +90,7 @@ public class Pessoa extends GenericEntity {
 	 * Referencia ao vinculo do colaborador
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa_colaborador")
+	@JoinColumn(name = "id_pessoa")
 	private List<Vinculo> listVinculo;
 
 	public String getNome() {
@@ -163,8 +164,10 @@ public class Pessoa extends GenericEntity {
 	public void setListVinculo(List<Vinculo> listVinculo) {
 		this.listVinculo = listVinculo;
 	}
-	
+
 	public Vinculo getVinculoAtivo() {
-		return this.listVinculo.stream().filter(vinc -> {return vinc.getStatusVinculo() == true;}).findFirst().get();
+		return this.listVinculo.stream().filter(vinc -> {
+			return vinc.getStatusVinculo() == true;
+		}).findFirst().get();
 	}
 }

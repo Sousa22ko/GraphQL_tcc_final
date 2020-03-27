@@ -1,4 +1,4 @@
-package com.graphql.exemple.repository;
+package com.graphql.exemple.core;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +12,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import com.graphql.exemple.model.GenericEntity;
-
 @NoRepositoryBean
 public interface GenericRepository<T extends GenericEntity> extends JpaRepository<T, Integer> {
 
@@ -23,7 +21,7 @@ public interface GenericRepository<T extends GenericEntity> extends JpaRepositor
 	@Override
 	@Query(value = "select e from #{#entityName} e where e.ativo = true order by e.id asc")
 	List<T> findAll();
-	
+
 	@Override
 	@Query(value = "select e from #{#entityName} e where e.ativo = true")
 	Page<T> findAll(Pageable pageable);
@@ -61,14 +59,14 @@ public interface GenericRepository<T extends GenericEntity> extends JpaRepositor
 
 	@Query(value = "select count(e) from #{#entityName} e where e.ativo = true")
 	long countAtivo();
-	
+
 	/**
 	 * Deleted entities
 	 */
-	
+
 	@Query(value = "select e from #{#entityName} e where e.ativo = false order by e.id asc")
 	List<T> findInactiveAll();
-	
+
 	@Query(value = "select e from #{#entityName} e where e.ativo = false")
 	Page<T> findInactiveAll(Pageable pageable);
 

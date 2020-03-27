@@ -4,11 +4,10 @@ schema {
 
 type Query {
 	findAll: [Pessoa]
-	findById(id: Integer): Pessoa
+	findById(id: Int): Pessoa
 }
 
 type Pessoa {
-	id_pessoa: Integer
 	nome: String
-	dataNascimento: Date
+	cpf: String
 }

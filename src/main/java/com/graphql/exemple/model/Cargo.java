@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Where;
 
+import com.graphql.exemple.core.GenericEntity;
+
 /**
  *
  * Entidade que representa os cargos dos colaboradores do nuplam
@@ -17,7 +19,7 @@ import org.hibernate.annotations.Where;
  *
  */
 @Entity
-@Table(name = "cargo", schema = "rh")
+@Table(name = "cargo")
 @AttributeOverride(name = "id", column = @Column(name = "id_cargo"))
 @Where(clause = "ativo = true")
 public class Cargo extends GenericEntity {

@@ -1,4 +1,4 @@
-package com.graphql.exemple.service;
+package com.graphql.exemple.core;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -28,8 +28,6 @@ import org.thymeleaf.util.StringUtils;
 import com.google.gson.internal.LinkedTreeMap;
 import com.graphql.exemple.APIQL.APIQueryParams;
 import com.graphql.exemple.APIQL.ObjectToJPQL;
-import com.graphql.exemple.model.GenericEntity;
-import com.graphql.exemple.repository.GenericRepository;
 import com.graphql.exemple.util.LoggerHelper;
 
 /**

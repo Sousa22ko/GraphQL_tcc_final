@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.graphql.exemple.core.GenericEntity;
 import com.graphql.exemple.util.CustomDateDeserializer;
 import com.graphql.exemple.util.DateFormat;
 
@@ -31,7 +32,7 @@ import com.graphql.exemple.util.DateFormat;
  * 
  */
 @Entity
-@Table(name = "vinculo", schema = "rh")
+@Table(name = "vinculo")
 @AttributeOverride(name = "id", column = @Column(name = "id_vinculo"))
 @Where(clause = "ativo = true")
 public class Vinculo extends GenericEntity {

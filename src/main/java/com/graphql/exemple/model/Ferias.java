@@ -15,13 +15,15 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Where;
 
+import com.graphql.exemple.core.GenericEntity;
+
 /**
  * A entidade representa as ferias de um ano em especifico de um colaborador
  * 
  * @author Reinaldo Sousa
  */
 @Entity
-@Table(name = "ferias", schema = "rh")
+@Table(name = "ferias")
 @AttributeOverride(name = "id", column = @Column(name = "id_ferias"))
 @Where(clause = "ativo = true")
 public class Ferias extends GenericEntity {

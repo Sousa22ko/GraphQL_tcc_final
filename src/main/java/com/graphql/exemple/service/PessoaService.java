@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 
 import com.graphql.exemple.APIQL.APIQueryParams;
+import com.graphql.exemple.core.GenericService;
 import com.graphql.exemple.exception.NegocioException;
 import com.graphql.exemple.model.Ferias;
 import com.graphql.exemple.model.FeriasParcela;
@@ -203,12 +204,5 @@ public class PessoaService extends GenericService<Pessoa, PessoaRepository> {
 
 	public Pessoa findByNome(String nome) {
 		return this.repository.findByNome(nome);
-	}
-
-	/**
-	 * Retorna todos os usuários que não possuem login.
-	 */
-	public List<Pessoa> findByNullUser() {
-		return this.repository.findByNullUser();
 	}
 }

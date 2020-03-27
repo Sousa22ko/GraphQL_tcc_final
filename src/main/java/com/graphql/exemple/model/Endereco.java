@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.graphql.exemple.core.GenericEntity;
+
 /**
  * Entidade referencia o endereço de uma pessoa
  * 
@@ -13,7 +15,7 @@ import javax.validation.constraints.NotNull;
  *
  */
 @Entity
-@Table(name = "endereco", schema = "rh")
+@Table(name = "endereco")
 @AttributeOverride(name = "id", column = @Column(name = "id_endereco"))
 public class Endereco extends GenericEntity {
 

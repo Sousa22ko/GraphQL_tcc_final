@@ -1,8 +1,6 @@
-package com.graphql.exemple.core.datafecher;
+package com.graphql.exemple.core;
 
 import java.io.File;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -11,10 +9,10 @@ import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 
-public abstract class GenericGraphQLService<T> {
+public abstract class GenericGraphQLService {// <T> {
 
-	@Autowired
-	protected T dataFetcher;
+//	@Autowired
+//	protected T dataFetcher;
 
 	protected GraphQL graphQL;
 

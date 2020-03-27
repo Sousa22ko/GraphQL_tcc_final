@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.graphql.exemple.model.GenericEntity;
-import com.graphql.exemple.repository.GenericRepository;
+import com.graphql.exemple.core.GenericEntity;
+import com.graphql.exemple.core.GenericRepository;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
-public class GenericListDataFetcher<T extends GenericEntity, R extends GenericRepository<T>, X>
-		implements DataFetcher<X> {
+public class GenericListDataFetcher<T extends GenericEntity, R extends GenericRepository<T>, X>	implements DataFetcher<X> {
 
-	private final Class<X> typeParameter;
+	protected Class<X> typeParameter;
 
 	@Autowired
 	private R repository;

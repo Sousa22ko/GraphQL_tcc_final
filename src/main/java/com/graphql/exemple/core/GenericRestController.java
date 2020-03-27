@@ -1,4 +1,4 @@
-package com.graphql.exemple.controller;
+package com.graphql.exemple.core;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -28,8 +28,6 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.graphql.exemple.APIQL.APIQueryParams;
 import com.graphql.exemple.APIQL.ObjectToJPQL;
 import com.graphql.exemple.exception.NegocioException;
-import com.graphql.exemple.model.GenericEntity;
-import com.graphql.exemple.service.GenericService;
 import com.graphql.exemple.util.JSONProcessor;
 
 /**
@@ -41,7 +39,8 @@ import com.graphql.exemple.util.JSONProcessor;
  * @param <S> Serviço que o controller usa para armazenar os dados.
  */
 @SuppressWarnings("rawtypes")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS, RequestMethod.DELETE })
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS,
+		RequestMethod.DELETE })
 public class GenericRestController<T extends GenericEntity, S extends GenericService> {
 
 	@Autowired
