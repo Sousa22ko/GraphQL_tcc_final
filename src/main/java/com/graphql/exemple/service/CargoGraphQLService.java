@@ -10,13 +10,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.graphql.exemple.core.GenericGraphQLService;
-import com.graphql.exemple.service.datafetcher.FindAllPessoaDataFetcher;
-import com.graphql.exemple.service.datafetcher.FindByIdPessoaDataFetcher;
+import com.graphql.exemple.service.datafetcher.FindAllCargoDataFetcher;
+import com.graphql.exemple.service.datafetcher.FindByIdCargoDataFetcher;
 
 @Service
-public class PessoaGraphQLService extends GenericGraphQLService<FindAllPessoaDataFetcher, FindByIdPessoaDataFetcher> {
+public class CargoGraphQLService extends GenericGraphQLService<FindAllCargoDataFetcher, FindByIdCargoDataFetcher> {
 
-	@Value("classpath:pessoa.graphql")
+	@Value("classpath:cargo.graphql")
 	Resource resource;
 
 	@Override

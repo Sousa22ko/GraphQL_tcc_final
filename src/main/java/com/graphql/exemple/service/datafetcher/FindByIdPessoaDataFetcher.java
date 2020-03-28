@@ -9,10 +9,7 @@ import com.graphql.exemple.repository.PessoaRepository;
 @Component
 public class FindByIdPessoaDataFetcher extends GenericListDataFetcher<Pessoa, PessoaRepository, Pessoa> {
 
-	private static final Class<Pessoa> c = null;
-
 	public FindByIdPessoaDataFetcher() {
-		super(c);
-		this.typeParameter = c;
+		super(Pessoa.class);
 	}
 }

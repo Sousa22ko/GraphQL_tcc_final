@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import graphql.ExecutionResult;
 
+@SuppressWarnings("rawtypes")
 public class GenericResource<T extends GenericEntity, S extends GenericGraphQLService> {
 
 	@Autowired
@@ -16,7 +17,7 @@ public class GenericResource<T extends GenericEntity, S extends GenericGraphQLSe
 	@GetMapping
 	public ResponseEntity<Object> findAll(@RequestBody String query) {
 		ExecutionResult result = service.getGraphQL().execute(query);
-		return new ResponseEntity<Object>(result, HttpStatus.OK);
+		return new ResponseEntity<Object>(result.getData(), HttpStatus.OK);
 
 	}
 }

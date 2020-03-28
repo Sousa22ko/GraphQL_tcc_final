@@ -10,14 +10,15 @@ import com.graphql.exemple.core.GenericRepository;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
+@SuppressWarnings("rawtypes")
 public class GenericListDataFetcher<T extends GenericEntity, R extends GenericRepository<T>, X>	implements DataFetcher<X> {
 
-	protected Class<X> typeParameter;
+	protected Class typeParameter;
 
 	@Autowired
 	private R repository;
 
-	public GenericListDataFetcher(Class<X> x) {
+	public GenericListDataFetcher(Class x) {
 		typeParameter = x;
 	}
 

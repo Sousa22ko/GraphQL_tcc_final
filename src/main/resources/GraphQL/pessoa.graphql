@@ -8,6 +8,7 @@ type Query {
 }
 
 type Pessoa {
+	id: Int
 	nome: String
 	cpf: String
 }
