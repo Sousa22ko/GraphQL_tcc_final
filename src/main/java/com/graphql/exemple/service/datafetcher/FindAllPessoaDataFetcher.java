@@ -11,7 +11,4 @@ import com.graphql.exemple.repository.PessoaRepository;
 @Component
 public class FindAllPessoaDataFetcher extends GenericListDataFetcher<Pessoa, PessoaRepository, ArrayList<Pessoa>> {
 
-	public FindAllPessoaDataFetcher() {
-		super(ArrayList.class);
-	}
 }

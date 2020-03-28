@@ -11,7 +11,4 @@ import com.graphql.exemple.repository.CargoRepository;
 @Component
 public class FindAllCargoDataFetcher extends GenericListDataFetcher<Cargo, CargoRepository, ArrayList<Cargo>> {
 
-	public FindAllCargoDataFetcher() {
-		super(ArrayList.class);
-	}
 }

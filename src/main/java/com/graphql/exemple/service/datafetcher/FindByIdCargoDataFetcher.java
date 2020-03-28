@@ -9,7 +9,4 @@ import com.graphql.exemple.repository.CargoRepository;
 @Component
 public class FindByIdCargoDataFetcher extends GenericListDataFetcher<Cargo, CargoRepository, Cargo> {
 
-	public FindByIdCargoDataFetcher() {
-		super(Cargo.class);
-	}
 }
