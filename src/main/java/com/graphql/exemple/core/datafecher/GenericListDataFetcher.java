@@ -22,7 +22,7 @@ public class GenericListDataFetcher<T extends GenericEntity, R extends GenericRe
 
 		if (field.equals("findById")) {
 			return (X) repository.findById(environment.getArgument("id")).get();
-		} else if(field.equals("findALl")){
+		} else if(field.equals("findAll")){
 			return (X) repository.findAll();
 		}
 		else {
