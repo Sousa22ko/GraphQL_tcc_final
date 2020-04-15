@@ -24,5 +24,4 @@ public class ExemploGraphQlApplication {
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("America/Recife"));
 	}
-
 }

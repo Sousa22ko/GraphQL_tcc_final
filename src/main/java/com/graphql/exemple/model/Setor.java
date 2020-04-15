@@ -2,14 +2,18 @@ package com.graphql.exemple.model;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.graphql.exemple.core.GenericEntity;
+import com.graphql.exemple.model.Constants.TipoSetor;
 
 /**
  * Entidade que define o setor
@@ -49,7 +53,10 @@ public class Setor extends GenericEntity {
 	 * Setor responsável pelo setor atual.
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
 	private Setor superSetor;
+	
+	private String tipoSetor;
 
 	public String getCodigoProprio() {
 		return codigo;
@@ -93,4 +100,13 @@ public class Setor extends GenericEntity {
 	public void setSuperSetor(Setor superSetor) {
 		this.superSetor = superSetor;
 	}
+
+	public String getTipoSetor() {
+		return new TipoSetor().getValue(this.tipoSetor);
+	}
+
+	public void setTipoSetor(String tipoSetor) {
+		this.tipoSetor = tipoSetor;
+	}
+	
 }

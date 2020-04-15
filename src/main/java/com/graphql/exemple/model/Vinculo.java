@@ -85,8 +85,8 @@ public class Vinculo extends GenericEntity {
 	 * Referencia a lista de ferias do funcionario
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa")
-	private List<Ferias> listFerias;
+	@JoinColumn(name = "id_vinculo")
+	private List<Ferias> ferias;
 
 	public String getTipoVinculo() {
 		return tipoVinculo;
@@ -144,11 +144,11 @@ public class Vinculo extends GenericEntity {
 		this.statusVinculo = statusVinculo;
 	}
 
-	public List<Ferias> getListFerias() {
-		return listFerias;
+	public List<Ferias> getFerias() {
+		return ferias;
 	}
 
-	public void setListFerias(List<Ferias> listFerias) {
-		this.listFerias = listFerias;
+	public void setFerias(List<Ferias> listFerias) {
+		this.ferias = listFerias;
 	}
 }

@@ -67,5 +67,4 @@ public class FeriasParcela extends GenericEntity {
 	public void setFim(Date fim) {
 		this.fim = fim;
 	}
-
 }

@@ -91,7 +91,7 @@ public class Pessoa extends GenericEntity {
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_pessoa")
-	private List<Vinculo> listVinculo;
+	private List<Vinculo> vinculos;
 
 	public String getNome() {
 		return nome;
@@ -157,16 +157,16 @@ public class Pessoa extends GenericEntity {
 		this.statusCadastro = statusCadastro;
 	}
 
-	public List<Vinculo> getListVinculo() {
-		return listVinculo;
+	public List<Vinculo> getVinculos() {
+		return vinculos;
 	}
 
-	public void setListVinculo(List<Vinculo> listVinculo) {
-		this.listVinculo = listVinculo;
+	public void setVinculos(List<Vinculo> listVinculo) {
+		this.vinculos = listVinculo;
 	}
 
 	public Vinculo getVinculoAtivo() {
-		return this.listVinculo.stream().filter(vinc -> {
+		return this.vinculos.stream().filter(vinc -> {
 			return vinc.getStatusVinculo() == true;
 		}).findFirst().get();
 	}

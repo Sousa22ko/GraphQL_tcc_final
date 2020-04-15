@@ -3,7 +3,7 @@ schema {
 }
 
 type Query {
-	findAll: [Pessoa]
+	findAll(limit: Int): [Pessoa]
 	findById(id: Int): Pessoa
 }
 
@@ -11,4 +11,44 @@ type Pessoa {
 	id: Int
 	nome: String
 	cpf: String
+	endereco: Endereco
+	vinculos: [Vinculo]
 }
+
+type Vinculo {
+	statusVinculo: Boolean
+	tipoVinculo: String
+	setor: Setor
+	matricula: String
+	jornadaSemanal: Int
+	ferias: [Ferias]
+}
+
+type Endereco {
+	id: Int
+	logradouro: String
+	bairro: String
+	cidade: String
+	estado: String
+}
+
+type Ferias {
+	anoReferencia: String
+	status: String
+#	feriasParcelas: [FeriasParcelas]
+}
+
+#type FeriasParcelas {
+#	inicio: Date
+#	fim: Date
+#}
+
+type Setor {
+	denominacao: String
+	sigla: String
+	codigo: String
+	tipoSetor: String
+}
+
+#scalar Date
+
