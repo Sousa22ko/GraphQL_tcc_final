@@ -13,6 +13,7 @@ type Pessoa {
 	cpf: String
 	endereco: Endereco
 	vinculos: [Vinculo]
+	dataNascimento: Date
 }
 
 type Vinculo {
@@ -35,13 +36,13 @@ type Endereco {
 type Ferias {
 	anoReferencia: String
 	status: String
-#	feriasParcelas: [FeriasParcelas]
+	feriasParcelas: [FeriasParcelas]
 }
 
-#type FeriasParcelas {
-#	inicio: Date
-#	fim: Date
-#}
+type FeriasParcelas {
+	inicio: Date
+	fim: Date
+}
 
 type Setor {
 	denominacao: String
@@ -50,5 +51,5 @@ type Setor {
 	tipoSetor: String
 }
 
-#scalar Date
+scalar Date
 

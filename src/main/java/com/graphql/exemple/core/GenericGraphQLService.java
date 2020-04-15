@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import com.graphql.exemple.model.scalar.DateScalar;
 import com.graphql.exemple.util.TypeWiringHelper;
 
 import graphql.GraphQL;
@@ -57,7 +58,8 @@ public abstract class GenericGraphQLService<ALL extends GenericDataFetcher, ONE 
 	private void register() throws IOException {
 		TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(Resources.toString(resourcePath, Charsets.UTF_8));
 
-		GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,	generateRuntimeWiring(RuntimeWiring.newRuntimeWiring()));
+		new DateScalar();
+		GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,	generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));
 		graphQL = GraphQL.newGraphQL(schema).build();
 	}
 }
