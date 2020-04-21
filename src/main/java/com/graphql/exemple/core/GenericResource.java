@@ -15,7 +15,7 @@ public class GenericResource<T extends GenericEntity, S extends GenericGraphQLSe
 	protected S service;
 
 	@GetMapping
-	public ResponseEntity<Object> findAll(@RequestBody String query) {
+	public ResponseEntity<Object> query(@RequestBody String query) {
 		ExecutionResult result = service.getGraphQL().execute(query);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}

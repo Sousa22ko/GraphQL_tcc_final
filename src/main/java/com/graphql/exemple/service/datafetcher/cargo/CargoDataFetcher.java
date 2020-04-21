@@ -9,6 +9,6 @@ import com.graphql.exemple.model.Cargo;
 import com.graphql.exemple.repository.CargoRepository;
 
 @Component
-public class FindAllCargoDataFetcher extends GenericDataFetcher<Cargo, CargoRepository, ArrayList<Cargo>> {
+public class CargoDataFetcher extends GenericDataFetcher<Cargo, CargoRepository, ArrayList<Cargo>> {
 
 }

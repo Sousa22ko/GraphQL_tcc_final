@@ -11,20 +11,27 @@ import graphql.schema.idl.TypeRuntimeWiring;
 @SuppressWarnings("rawtypes")
 public class TypeWiringHelper {
 
-	public static DataFetcher one;
-	public static DataFetcher list;
+	public static DataFetcher datafetcher;
 
 	public static UnaryOperator<TypeRuntimeWiring.Builder> customTipewiring(List<String> fieldName,
-			List<DataFetcher> dataFetcher, DataFetcher one, DataFetcher list) throws Exception {
-		if (fieldName.size() != dataFetcher.size()) {
-			throw new Exception("field name e dataFecthers não são compativeis");
-		}
+			List<DataFetcher> customDataFetcher) {
 
 		Map<String, DataFetcher> map = new HashMap<String, DataFetcher>();
 		for (int i = 0; i < fieldName.size(); i++) {
-			map.put(fieldName.get(i), dataFetcher.get(i));
+			map.put(fieldName.get(i), customDataFetcher.get(i));
 		}
-		
+
+		map.putAll(defaultMapTypeWiring());
+
+		return typewiring -> typewiring.dataFetchers(map);
+	}
+
+	public static UnaryOperator<TypeRuntimeWiring.Builder> customTipewiring(String fieldName,
+			DataFetcher customDataFetcher) {
+
+		Map<String, DataFetcher> map = new HashMap<String, DataFetcher>();
+		map.put(fieldName, customDataFetcher);
+
 		map.putAll(defaultMapTypeWiring());
 
 		return typewiring -> typewiring.dataFetchers(map);
@@ -37,8 +44,9 @@ public class TypeWiringHelper {
 	private static Map<String, DataFetcher> defaultMapTypeWiring() {
 		Map<String, DataFetcher> defaultMap = new HashMap<String, DataFetcher>();
 
-		defaultMap.put(Constant.findAll, list);
-		defaultMap.put(Constant.findById, one);
+		defaultMap.put(Constant.findAll, datafetcher);
+		defaultMap.put(Constant.findById, datafetcher);
+		defaultMap.put(Constant.count, datafetcher);
 		return defaultMap;
 
 	}

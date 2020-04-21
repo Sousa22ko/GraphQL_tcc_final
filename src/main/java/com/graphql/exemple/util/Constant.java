@@ -16,5 +16,10 @@ public class Constant {
 	 * find By Id
 	 */
 	public static final String findById = "findById";
+	
+	/**
+	 * find By Id
+	 */
+	public static final String count = "count";
 
 }

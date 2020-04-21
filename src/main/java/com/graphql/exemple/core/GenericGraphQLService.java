@@ -20,13 +20,10 @@ import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 
 @SuppressWarnings("rawtypes")
-public abstract class GenericGraphQLService<ALL extends GenericDataFetcher, ONE extends GenericDataFetcher> {
+public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 
 	@Autowired
-	private ALL findList;
-
-	@Autowired
-	private ONE findOne;
+	protected DF dataFetcher;
 
 	private GraphQL graphQL;
 
@@ -34,8 +31,7 @@ public abstract class GenericGraphQLService<ALL extends GenericDataFetcher, ONE 
 
 	@PostConstruct
 	private void init() throws IOException {
-		TypeWiringHelper.one = findOne;
-		TypeWiringHelper.list = findList;
+		TypeWiringHelper.datafetcher = dataFetcher;
 		loadResource();
 		register();
 	}
@@ -46,7 +42,7 @@ public abstract class GenericGraphQLService<ALL extends GenericDataFetcher, ONE 
 		return this.graphQL;
 	}
 	
-	private RuntimeWiring generateRuntimeWiring(RuntimeWiring.Builder builder) {
+	protected RuntimeWiring generateRuntimeWiring(RuntimeWiring.Builder builder) {
 		try {
 			return builder.type("Query", TypeWiringHelper.defaultTypeWiring()).build();
 		} catch (Exception e) {
@@ -58,7 +54,6 @@ public abstract class GenericGraphQLService<ALL extends GenericDataFetcher, ONE 
 	private void register() throws IOException {
 		TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(Resources.toString(resourcePath, Charsets.UTF_8));
 
-		new DateScalar();
 		GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,	generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));
 		graphQL = GraphQL.newGraphQL(schema).build();
 	}

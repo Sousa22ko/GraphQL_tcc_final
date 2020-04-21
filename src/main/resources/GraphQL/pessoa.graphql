@@ -3,8 +3,10 @@ schema {
 }
 
 type Query {
-	findAll(limit: Int): [Pessoa]
+	findAll(size: Int): [Pessoa]
 	findById(id: Int): Pessoa
+	findByName(nome: String): [Pessoa]
+	count: [Int]
 }
 
 type Pessoa {

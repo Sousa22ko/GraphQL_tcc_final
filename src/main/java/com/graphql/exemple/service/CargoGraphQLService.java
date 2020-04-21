@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.io.Resources;
 import com.graphql.exemple.core.GenericGraphQLService;
-import com.graphql.exemple.service.datafetcher.cargo.FindAllCargoDataFetcher;
-import com.graphql.exemple.service.datafetcher.cargo.FindByIdCargoDataFetcher;
+import com.graphql.exemple.service.datafetcher.cargo.CargoDataFetcher;
 
 @Service
-public class CargoGraphQLService extends GenericGraphQLService<FindAllCargoDataFetcher, FindByIdCargoDataFetcher> {
+public class CargoGraphQLService extends GenericGraphQLService<CargoDataFetcher> {
 
 	@Override
 	@PostConstruct
