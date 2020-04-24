@@ -71,20 +71,22 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 	}
 
 	private void preRegister() throws IOException {
-		TypeDefinitionRegistry typeRegistry = new SchemaParser()
-				.parse(Resources.toString(resourcePath, Charsets.UTF_8));
+		TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(Resources.toString(resourcePath, Charsets.UTF_8));
 
-		schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,
-				generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));
-		
+		schema = new SchemaGenerator().makeExecutableSchema(typeRegistry, generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));		
 		builder = GraphQLSchema.newSchema(schema);
 	}
 
 	private void register() {
-		schemaMutator = builder.mutation(mutator).build();
+		schemaMutator = builder.build();
 		graphQL = GraphQL.newGraphQL(schemaMutator).build();
 	}
 
+	/**
+	 * sobrescreva para adicionar mutators
+	 * 
+	 * Crie um GraphQLObjectType e adicione a lista mutators para serem carregados
+	 */
 	protected void setMutator() {
 	}
 	

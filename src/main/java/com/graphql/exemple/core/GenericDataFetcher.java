@@ -94,7 +94,7 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		paginationController(result.size());
 
 		return (X) result.subList(0, size);
-//		return (X) result.subList((page * size), (page * size) + size);
+		//return (X) result.subList((page * size), (page * size) + size);
 	}
 
 	private X save() {
@@ -104,6 +104,7 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		return (X) response;
 	}
 
+	//TODO corrigir problema com o page
 	private void paginationController(Integer resultSize) {
 
 		if (page != null) {
@@ -143,10 +144,10 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		this.id = environment.getArgument("id");
 		this.size = environment.getArgument("size");
 		this.page = environment.getArgument("page");
-		this.obj = conversor(environment.getArgument("obj"));
+		this.obj = linkedHMapToObject(environment.getArgument("obj"));
 	}
 
-	private T conversor(LinkedHashMap<String, Object> input) {
+	private T linkedHMapToObject(LinkedHashMap<String, Object> input) {
 
 		ObjectMapper mapper = new ObjectMapper();
 		T result = mapper.convertValue(input, inferirTipoGenerico());
