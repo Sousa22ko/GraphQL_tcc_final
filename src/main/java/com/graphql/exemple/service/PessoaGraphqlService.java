@@ -33,11 +33,14 @@ public class PessoaGraphQLService extends GenericGraphQLService<PessoaDataFetche
 		GraphQLInputObjectType in = GraphQLInputObjectType.newInputObject().name("PessoaInput")
 				.field(newInputField().name("nome").type(Scalars.GraphQLString).build())
 				.field(newInputField().name("cpf").type(Scalars.GraphQLString).build())
-				.field(newInputField().name("email").type(Scalars.GraphQLString).build()).build();
+				.field(newInputField().name("email").type(Scalars.GraphQLString).build())
+				.field(newInputField().name("statusCadastro").type(Scalars.GraphQLString).build()).build();
 
 		this.mutator = newObject().name("SavePessoa")
 				.field(newField().name("save").argument(newArgument().name("obj").type(in).build())
 						.type(schema.getObjectType("Pessoa")).dataFetcher(dataFetcher).build())
 				.build();
+		
+		this.mutators.add(mutator);
 	}
 }

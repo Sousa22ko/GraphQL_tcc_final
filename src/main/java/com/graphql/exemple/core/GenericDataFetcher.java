@@ -1,11 +1,13 @@
 package com.graphql.exemple.core;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.graphql.exemple.util.Constant;
 
 import graphql.schema.DataFetcher;
@@ -54,8 +56,8 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		} else if (operationType.equals(Constant.FIND_ALL)) {
 			return findAll();
 
-//		} else if (operationType.equals(Constant.SAVE)) {
-//			return save();
+		} else if (operationType.equals(Constant.SAVE)) {
+			return save();
 
 		} else {
 			X operation = customOperation();
@@ -141,11 +143,18 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		this.id = environment.getArgument("id");
 		this.size = environment.getArgument("size");
 		this.page = environment.getArgument("page");
-//		this.obj = environment.getArgument("obj");
+		this.obj = conversor(environment.getArgument("obj"));
 	}
-	
-//	private T conversor(LinkedHashMap<String, Object> input) {
-//		
-//	}
 
+	private T conversor(LinkedHashMap<String, Object> input) {
+
+		ObjectMapper mapper = new ObjectMapper();
+		T result = mapper.convertValue(input, inferirTipoGenerico());
+
+		return result;
+	}
+
+	public Class<T> inferirTipoGenerico() {
+		return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+	}
 }

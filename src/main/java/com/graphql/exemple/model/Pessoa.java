@@ -85,7 +85,7 @@ public class Pessoa extends GenericEntity {
 	 * Cadastro finalizado = True.
 	 */
 	@NotNull(message = "Status do cadastro do Colaborador vazio.")
-	private Boolean statusCadastro;
+	private Boolean statusCadastro = true;
 
 	/**
 	 * Referencia ao vinculo do colaborador
@@ -167,7 +167,7 @@ public class Pessoa extends GenericEntity {
 	}
 
 	public Vinculo getVinculoAtivo() {
-		if (this.vinculos != null & this.vinculos.size() > 0)
+		if (this.vinculos != null && this.vinculos.size() > 0)
 			return this.vinculos.stream().filter(vinc -> {
 				return vinc.getStatusVinculo() == true;
 			}).findFirst().get();

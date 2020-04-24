@@ -2,6 +2,8 @@ package com.graphql.exemple.core;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -34,9 +36,14 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 	protected URL resourcePath;
 
 	protected GraphQLObjectType mutator;
+	
+	protected List<GraphQLObjectType> mutators = new ArrayList<GraphQLObjectType>();
 
 	protected GraphQLSchema schema;
 	protected GraphQLSchema schemaMutator;
+	
+	private GraphQLSchema.Builder builder;
+	
 
 	@PostConstruct
 	private void init() throws IOException {
@@ -44,6 +51,7 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 		loadResource();
 		preRegister();
 		setMutator();
+		loadMutator();
 		register();
 	}
 
@@ -68,15 +76,26 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 
 		schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,
 				generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));
-
+		
+		builder = GraphQLSchema.newSchema(schema);
 	}
 
 	private void register() {
-		schemaMutator = GraphQLSchema.newSchema(schema).mutation(mutator).build();
+		schemaMutator = builder.mutation(mutator).build();
 		graphQL = GraphQL.newGraphQL(schemaMutator).build();
 	}
 
 	protected void setMutator() {
+	}
+	
+	private void loadMutator() {
+		for(GraphQLObjectType aux : mutators) {
+			 builder = builder.mutation(aux);
+		}
+	}
+		
+	protected GraphQLSchema.Builder generateMutations(){
+		return GraphQLSchema.newSchema(schema);
 	}
 
 	protected GraphQLObjectType.Builder newObject() {
