@@ -1,4 +1,4 @@
-package com.graphql.exemple.service.datafetcher.cargo;
+package com.graphql.exemple.datafetcher;
 
 import java.util.ArrayList;
 

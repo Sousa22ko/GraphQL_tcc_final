@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.io.Resources;
 import com.graphql.exemple.core.GenericGraphQLService;
-import com.graphql.exemple.service.datafetcher.cargo.CargoDataFetcher;
+import com.graphql.exemple.datafetcher.CargoDataFetcher;
 
 @Service
 public class CargoGraphQLService extends GenericGraphQLService<CargoDataFetcher> {
@@ -18,4 +18,5 @@ public class CargoGraphQLService extends GenericGraphQLService<CargoDataFetcher>
 	protected void loadResource() throws IOException {
 		resourcePath = Resources.getResource("cargo.graphql");
 	}
+
 }

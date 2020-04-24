@@ -1,5 +1,6 @@
 schema {
 	query: Query
+	mutation: Mutation
 }
 
 type Query {
@@ -7,12 +8,24 @@ type Query {
 	findById(id: Int): Pessoa
 	findByName(nome: String): [Pessoa]
 	count: [Int]
+#	save(obj: Pessoa): Pessoa
+}
+
+type Mutation {
+	save(obj: PessoaInput): Pessoa
+}
+
+input PessoaInput {
+	nome: String!
+	cpf: String!
+	email: String!
 }
 
 type Pessoa {
 	id: Int
 	nome: String
 	cpf: String
+	email: String
 	endereco: Endereco
 	vinculos: [Vinculo]
 	dataNascimento: Date

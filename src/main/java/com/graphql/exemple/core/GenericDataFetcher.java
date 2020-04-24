@@ -1,6 +1,7 @@
 package com.graphql.exemple.core;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,35 +32,39 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 
 	private Integer id;
 
+	private T obj;
+
 	protected DataFetchingEnvironment environment;
 
-	protected String field;
+	protected String operationType;
 
 	@Override
 	public X get(DataFetchingEnvironment environment) {
 
-		field = environment.getFields().get(0).getName();
+		operationType = environment.getFields().get(0).getName();
 
 		setFields(environment);
 
-		if (field.equals(Constant.count)) {
+		if (operationType.equals(Constant.COUNT)) {
 			return count();
 
-		} else if (field.equals(Constant.findById)) {
+		} else if (operationType.equals(Constant.FIND_BY_ID)) {
 			return findById();
 
-		} else if (field.equals(Constant.findAll)) {
+		} else if (operationType.equals(Constant.FIND_ALL)) {
 			return findAll();
+
+//		} else if (operationType.equals(Constant.SAVE)) {
+//			return save();
 
 		} else {
 			X operation = customOperation();
-			
-			// operation != null ? return operation : throw new UnsupportedOperationException("tipo de query não suportada. revise o seu .graphql ou sua query");
-			
+
 			if (operation != null)
 				return operation;
 			else
-				throw new UnsupportedOperationException("tipo de query não suportada. revise o seu .graphql ou sua query");
+				throw new UnsupportedOperationException(
+						"tipo de query não suportada. revise o seu .graphql ou sua query");
 		}
 	}
 
@@ -88,6 +93,13 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 
 		return (X) result.subList(0, size);
 //		return (X) result.subList((page * size), (page * size) + size);
+	}
+
+	private X save() {
+		List<T> response = new ArrayList<T>();
+
+		response.add(this.repository.save(this.obj));
+		return (X) response;
 	}
 
 	private void paginationController(Integer resultSize) {
@@ -129,6 +141,11 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		this.id = environment.getArgument("id");
 		this.size = environment.getArgument("size");
 		this.page = environment.getArgument("page");
+//		this.obj = environment.getArgument("obj");
 	}
+	
+//	private T conversor(LinkedHashMap<String, Object> input) {
+//		
+//	}
 
 }

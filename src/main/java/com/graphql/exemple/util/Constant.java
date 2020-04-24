@@ -10,16 +10,21 @@ public class Constant {
 	/**
 	 * find All
 	 */
-	public static final String findAll = "findAll";
+	public static final String FIND_ALL = "findAll";
 	
 	/**
 	 * find By Id
 	 */
-	public static final String findById = "findById";
+	public static final String FIND_BY_ID = "findById";
 	
 	/**
-	 * find By Id
+	 * count
 	 */
-	public static final String count = "count";
+	public static final String COUNT = "count";
+	
+	/**
+	 * Save
+	 */
+	public static final String SAVE = "save";
 
 }

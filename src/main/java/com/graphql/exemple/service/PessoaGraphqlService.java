@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.io.Resources;
 import com.graphql.exemple.core.GenericGraphQLService;
-import com.graphql.exemple.service.datafetcher.pessoa.PessoaDataFetcher;
+import com.graphql.exemple.datafetcher.PessoaDataFetcher;
 import com.graphql.exemple.util.TypeWiringHelper;
 
+import graphql.Scalars;
+import graphql.schema.GraphQLInputObjectType;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.RuntimeWiring.Builder;
 
@@ -25,4 +27,17 @@ public class PessoaGraphQLService extends GenericGraphQLService<PessoaDataFetche
 		return builder.type("Query", TypeWiringHelper.customTipewiring("findByName", this.dataFetcher)).build();
 	}
 
+	@Override
+	protected void setMutator() {
+
+		GraphQLInputObjectType in = GraphQLInputObjectType.newInputObject().name("PessoaInput")
+				.field(newInputField().name("nome").type(Scalars.GraphQLString).build())
+				.field(newInputField().name("cpf").type(Scalars.GraphQLString).build())
+				.field(newInputField().name("email").type(Scalars.GraphQLString).build()).build();
+
+		this.mutator = newObject().name("SavePessoa")
+				.field(newField().name("save").argument(newArgument().name("obj").type(in).build())
+						.type(schema.getObjectType("Pessoa")).dataFetcher(dataFetcher).build())
+				.build();
+	}
 }

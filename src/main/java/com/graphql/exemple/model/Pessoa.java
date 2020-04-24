@@ -1,6 +1,7 @@
 package com.graphql.exemple.model;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -67,7 +68,7 @@ public class Pessoa extends GenericEntity {
 	/**
 	 * CPF da pessoa
 	 */
-	@CPF
+//	@CPF
 	@NotNull(message = "CPF da Pessoa vazio.")
 	@Column(unique = true)
 	private String cpf;
@@ -166,8 +167,24 @@ public class Pessoa extends GenericEntity {
 	}
 
 	public Vinculo getVinculoAtivo() {
-		return this.vinculos.stream().filter(vinc -> {
-			return vinc.getStatusVinculo() == true;
-		}).findFirst().get();
+		if (this.vinculos != null & this.vinculos.size() > 0)
+			return this.vinculos.stream().filter(vinc -> {
+				return vinc.getStatusVinculo() == true;
+			}).findFirst().get();
+
+		else
+			return null;
+	}
+
+	public Pessoa() {
+
+	}
+
+	public Pessoa(LinkedHashMap<String, Object> pessoa) {
+		this.nome = (@NotNull(message = "Nome vazio.") String) pessoa.get("nome");
+		this.email = (@NotNull(message = "E-mail vazio.") @Email String) pessoa.get("email");
+		this.cpf = (@CPF @NotNull(message = "CPF da Pessoa vazio.") String) pessoa.get("cpf");
+		this.statusCadastro = true;
+
 	}
 }

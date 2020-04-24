@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.UnaryOperator;
 
 import graphql.schema.DataFetcher;
+import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.TypeRuntimeWiring;
 
 @SuppressWarnings("rawtypes")
@@ -44,10 +45,17 @@ public class TypeWiringHelper {
 	private static Map<String, DataFetcher> defaultMapTypeWiring() {
 		Map<String, DataFetcher> defaultMap = new HashMap<String, DataFetcher>();
 
-		defaultMap.put(Constant.findAll, datafetcher);
-		defaultMap.put(Constant.findById, datafetcher);
-		defaultMap.put(Constant.count, datafetcher);
+		defaultMap.put(Constant.FIND_ALL, datafetcher);
+		defaultMap.put(Constant.FIND_BY_ID, datafetcher);
+		defaultMap.put(Constant.COUNT, datafetcher);
 		return defaultMap;
 
+	}
+	
+	protected static RuntimeWiring generateRunTW() {
+		
+		RuntimeWiring tipe = RuntimeWiring.newRuntimeWiring().build();
+		
+		return tipe;
 	}
 }
