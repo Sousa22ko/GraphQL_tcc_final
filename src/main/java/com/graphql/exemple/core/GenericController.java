@@ -13,15 +13,15 @@ import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 
 @SuppressWarnings({"rawtypes","unchecked"})
-public class GenericResource<T extends GenericEntity, S extends GenericGraphQLService> {
+public abstract class GenericController<T extends GenericEntity, RES extends GenericResolver> {
 
 	@Autowired
-	protected S service;
+	protected RES resolver;
 
 	@RequestMapping
 	public ResponseEntity<Object> query(@RequestBody String query) {
 
-		ExecutionResult result = service.getGraphQL().execute(preProcessInput(query));
+		ExecutionResult result = resolver.getGraphQL().execute(preProcessInput(query));
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
@@ -30,7 +30,7 @@ public class GenericResource<T extends GenericEntity, S extends GenericGraphQLSe
 		LinkedTreeMap<String, Object> json = new Gson().fromJson(input, LinkedTreeMap.class);
 		LinkedTreeMap<String, Object> variaveis = (LinkedTreeMap<String, Object>) json.get("variables");
 
-		ExecutionInput query = new ExecutionInput((String)json.get("query"), null, this, "meh", variaveis);
+		ExecutionInput query = new ExecutionInput((String)json.get("query"), null, this, "root", variaveis);
 		return query;
 	}
 

@@ -2,13 +2,16 @@ package com.graphql.exemple.datafetcher;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
 
 import com.graphql.exemple.core.GenericDataFetcher;
 import com.graphql.exemple.model.Pessoa;
 import com.graphql.exemple.repository.PessoaRepository;
 
-@Component
+@Service
+@Transactional
 public class PessoaDataFetcher extends GenericDataFetcher<Pessoa, PessoaRepository, List<Pessoa>> {
 
 	@Override

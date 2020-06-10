@@ -1,11 +1,13 @@
 package com.graphql.exemple.util;
 
+import com.graphql.exemple.core.GenericConstant;
+
 /**
  * Tipos de metodos suportados na query
  * @author manom
  *
  */
-public class Constant {
+public class Constant extends GenericConstant{
 	
 	/**
 	 * find All

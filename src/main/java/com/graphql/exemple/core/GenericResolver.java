@@ -26,7 +26,7 @@ import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 
 @SuppressWarnings("rawtypes")
-public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
+public abstract class GenericResolver<DF extends GenericDataFetcher> {
 
 	@Autowired
 	protected DF dataFetcher;
@@ -36,14 +36,13 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 	protected URL resourcePath;
 
 	protected GraphQLObjectType mutator;
-	
+
 	protected List<GraphQLObjectType> mutators = new ArrayList<GraphQLObjectType>();
 
 	protected GraphQLSchema schema;
 	protected GraphQLSchema schemaMutator;
-	
+
 	private GraphQLSchema.Builder builder;
-	
 
 	@PostConstruct
 	private void init() throws IOException {
@@ -71,9 +70,12 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 	}
 
 	private void preRegister() throws IOException {
-		TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(Resources.toString(resourcePath, Charsets.UTF_8));
 
-		schema = new SchemaGenerator().makeExecutableSchema(typeRegistry, generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));		
+		TypeDefinitionRegistry typeRegistry = new SchemaParser()
+				.parse(Resources.toString(resourcePath, Charsets.UTF_8));
+
+		schema = new SchemaGenerator().makeExecutableSchema(typeRegistry,
+				generateRuntimeWiring(RuntimeWiring.newRuntimeWiring().scalar(DateScalar.DATE)));
 		builder = GraphQLSchema.newSchema(schema);
 	}
 
@@ -89,14 +91,14 @@ public abstract class GenericGraphQLService<DF extends GenericDataFetcher> {
 	 */
 	protected void setMutator() {
 	}
-	
+
 	private void loadMutator() {
-		for(GraphQLObjectType aux : mutators) {
-			 builder = builder.mutation(aux);
+		for (GraphQLObjectType aux : mutators) {
+			builder = builder.mutation(aux);
 		}
 	}
-		
-	protected GraphQLSchema.Builder generateMutations(){
+
+	protected GraphQLSchema.Builder generateMutations() {
 		return GraphQLSchema.newSchema(schema);
 	}
 

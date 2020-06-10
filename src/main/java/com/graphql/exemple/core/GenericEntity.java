@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.graphql.exemple.util.DateHelper;
 
 @MappedSuperclass
-public class GenericEntity implements Serializable {
+public abstract class GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

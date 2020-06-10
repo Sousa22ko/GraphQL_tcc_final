@@ -1,11 +1,11 @@
-package com.graphql.exemple.service;
+package com.graphql.exemple.resolver;
 
 import java.io.IOException;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.google.common.io.Resources;
-import com.graphql.exemple.core.GenericGraphQLService;
+import com.graphql.exemple.core.GenericResolver;
 import com.graphql.exemple.datafetcher.PessoaDataFetcher;
 import com.graphql.exemple.util.TypeWiringHelper;
 
@@ -14,8 +14,8 @@ import graphql.schema.GraphQLInputObjectType;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.RuntimeWiring.Builder;
 
-@Service
-public class PessoaGraphQLService extends GenericGraphQLService<PessoaDataFetcher> {
+@Component
+public class PessoaResolver extends GenericResolver<PessoaDataFetcher> {
 
 	@Override
 	protected void loadResource() throws IOException {

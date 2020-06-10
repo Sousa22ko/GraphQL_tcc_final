@@ -22,8 +22,7 @@ import graphql.schema.DataFetchingEnvironment;
  * @param <X> Tipo de retorno (List<T>)
  */
 @SuppressWarnings("unchecked")
-public abstract class GenericDataFetcher<T extends GenericEntity, R extends GenericRepository<T>, X>
-		implements DataFetcher<X> {
+public abstract class GenericDataFetcher<T extends GenericEntity, R extends GenericRepository<T>, X> implements DataFetcher<X> {
 
 	@Autowired
 	protected R repository;
@@ -34,16 +33,12 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 
 	private Integer id;
 
-	private T obj;
-
 	protected DataFetchingEnvironment environment;
 
 	protected String operationType;
 
 	@Override
 	public X get(DataFetchingEnvironment environment) {
-
-		operationType = environment.getFields().get(0).getName();
 
 		setFields(environment);
 
@@ -65,19 +60,20 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 			if (operation != null)
 				return operation;
 			else
-				throw new UnsupportedOperationException(
-						"tipo de query não suportada. revise o seu .graphql ou sua query");
+				throw new UnsupportedOperationException("tipo de query não suportada. revise o seu .graphql ou sua query");
 		}
 	}
 
 	/**
-	 * Implemente para adicionar uma operação adicional ao datafetcher
+	 * Implemente para adicionar operações adicionais ao datafetcher
+	 *
+	 * o campo operationType define qual operação foi passada pela consulta
 	 * 
 	 * @return
 	 */
 	protected X customOperation() {
 		return null;
-	};
+	}
 
 	private X count() {
 		List<Long> aux = new ArrayList<Long>();
@@ -93,14 +89,20 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 		List<T> result = this.repository.findAll();
 		paginationController(result.size());
 
-		return (X) result.subList(0, size);
-		//return (X) result.subList((page * size), (page * size) + size);
+//		return (X) result.subList(0, size);
+		return (X) result.subList((page * size), (page * size) + size);
 	}
 
 	private X save() {
+		
+		T obj = linkedHashMapToObject(environment.getArgument("obj"));
 		List<T> response = new ArrayList<T>();
-
-		response.add(this.repository.save(this.obj));
+		T resp = null;
+		
+		if(obj != null)
+			resp = this.repository.save(obj);
+		response.add(resp);
+		
 		return (X) response;
 	}
 
@@ -112,18 +114,9 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 			if ((page + 1) * size > resultSize) {
 
 				size = resultSize - (page * size);
-				page++;
-
-			} else if (resultSize > 10) {
-
-				int lenght = resultSize / 10;
-
-				if (lenght - 1 > page) {
-					page = lenght - 1;
-					size = resultSize % 10;
-				}
-				size = 10;
 			}
+			if (size == null)
+				size = resultSize > 10 ? 10 : resultSize;
 
 		} else {
 			page = 0;
@@ -138,16 +131,17 @@ public abstract class GenericDataFetcher<T extends GenericEntity, R extends Gene
 	}
 
 	private void setFields(DataFetchingEnvironment environment) {
-
+		
 		this.environment = environment;
-
+		
+		this.operationType = environment.getFields().get(0).getName();
+		
 		this.id = environment.getArgument("id");
 		this.size = environment.getArgument("size");
 		this.page = environment.getArgument("page");
-		this.obj = linkedHMapToObject(environment.getArgument("obj"));
 	}
 
-	private T linkedHMapToObject(LinkedHashMap<String, Object> input) {
+	private T linkedHashMapToObject(LinkedHashMap<String, Object> input) {
 
 		ObjectMapper mapper = new ObjectMapper();
 		T result = mapper.convertValue(input, inferirTipoGenerico());

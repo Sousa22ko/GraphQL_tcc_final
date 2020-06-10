@@ -1,17 +1,17 @@
-package com.graphql.exemple.service;
+package com.graphql.exemple.resolver;
 
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.google.common.io.Resources;
-import com.graphql.exemple.core.GenericGraphQLService;
+import com.graphql.exemple.core.GenericResolver;
 import com.graphql.exemple.datafetcher.CargoDataFetcher;
 
-@Service
-public class CargoGraphQLService extends GenericGraphQLService<CargoDataFetcher> {
+@Component
+public class CargoResolver extends GenericResolver<CargoDataFetcher> {
 
 	@Override
 	@PostConstruct
