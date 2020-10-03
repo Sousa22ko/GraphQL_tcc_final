@@ -19,7 +19,7 @@ public class PessoaResolver extends GenericResolver<PessoaDataFetcher> {
 
 	@Override
 	protected void loadResource() throws IOException {
-		resourcePath = Resources.getResource("pessoa.graphql");
+		resourcePath = Resources.getResource("pessoa.graphqls");
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class PessoaResolver extends GenericResolver<PessoaDataFetcher> {
 				.field(newInputField().name("nome").type(Scalars.GraphQLString).build())
 				.field(newInputField().name("cpf").type(Scalars.GraphQLString).build())
 				.field(newInputField().name("email").type(Scalars.GraphQLString).build())
-				.field(newInputField().name("statusCadastro").type(Scalars.GraphQLString).build()).build();
+				.field(newInputField().name("statusCadastro").type(Scalars.GraphQLBoolean).build()).build();
 
 		this.mutator = newObject().name("SavePessoa")
 				.field(newField().name("save").argument(newArgument().name("obj").type(in).build())

@@ -10,13 +10,13 @@ import com.google.common.io.Resources;
 import com.graphql.exemple.core.GenericResolver;
 import com.graphql.exemple.datafetcher.CargoDataFetcher;
 
-@Component
-public class CargoResolver extends GenericResolver<CargoDataFetcher> {
+//@Component
+public class CargoResolver {//extends GenericResolver<CargoDataFetcher> {
 
-	@Override
-	@PostConstruct
-	protected void loadResource() throws IOException {
-		resourcePath = Resources.getResource("cargo.graphql");
-	}
+//	@Override
+//	@PostConstruct
+//	protected void loadResource() throws IOException {
+//		resourcePath = Resources.getResource("cargo.graphqls");
+//	}
 
 }

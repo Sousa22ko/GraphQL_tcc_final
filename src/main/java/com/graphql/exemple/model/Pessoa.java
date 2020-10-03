@@ -179,6 +179,14 @@ public class Pessoa extends GenericEntity {
 	public Pessoa() {
 
 	}
+	
+	public Pessoa(String nome, String cpf, String email) {
+		this.id = 99;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.statusCadastro = true;
+	}
 
 	public Pessoa(LinkedHashMap<String, Object> pessoa) {
 		this.nome = (@NotNull(message = "Nome vazio.") String) pessoa.get("nome");

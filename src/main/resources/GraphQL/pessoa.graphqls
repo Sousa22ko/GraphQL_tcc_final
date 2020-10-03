@@ -19,6 +19,7 @@ input PessoaInput {
 	nome: String!
 	cpf: String!
 	email: String!
+	statusCadastro: Boolean
 }
 
 type Pessoa {
@@ -29,6 +30,7 @@ type Pessoa {
 	endereco: Endereco
 	vinculos: [Vinculo]
 	dataNascimento: Date
+	statusCadastro: Boolean
 }
 
 type Vinculo {
@@ -51,13 +53,13 @@ type Endereco {
 type Ferias {
 	anoReferencia: String
 	status: String
-	feriasParcelas: [FeriasParcelas]
+	#feriasParcelas: [FeriasParcelas]
 }
 
-type FeriasParcelas {
-	inicio: Date
-	fim: Date
-}
+#type FeriasParcelas {
+	#inicio: Date
+	#fim: Date
+#}
 
 type Setor {
 	denominacao: String

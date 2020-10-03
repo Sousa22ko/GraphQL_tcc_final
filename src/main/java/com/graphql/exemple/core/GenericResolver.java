@@ -49,7 +49,7 @@ public abstract class GenericResolver<DF extends GenericDataFetcher> {
 		TypeWiringHelper.datafetcher = dataFetcher;
 		loadResource();
 		preRegister();
-		setMutator();
+//		setMutator();
 		loadMutator();
 		register();
 	}
